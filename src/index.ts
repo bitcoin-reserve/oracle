@@ -13,6 +13,7 @@ import { CoingeckoPriceSource } from './ports/coingecko';
 import { KrakenPriceSource } from './ports/kraken';
 import { OkxPriceSource } from './ports/okx';
 import { BinancePriceSource } from './ports/binance';
+import {BitcoinReservePriceSource} from "./ports/bitcoinreserve";
 
 // ENV vars
 const PORT = process.env.PORT || 8000;
@@ -21,11 +22,8 @@ const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 // oracle price sources (median will be applied)
 const sources = [
-  new BitfinexPriceSource(),
-  new CoingeckoPriceSource(),
-  new KrakenPriceSource(),
-  new OkxPriceSource(),
-  new BinancePriceSource(),
+  new BitcoinReservePriceSource(),
+
 ];
 
 if (!PRIVATE_KEY) {
