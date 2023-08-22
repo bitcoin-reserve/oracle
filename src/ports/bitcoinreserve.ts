@@ -11,7 +11,7 @@ type BitcoinReserveResponse = {
 };
 
 function isBitcoinReserveResponse(obj: any): obj is BitcoinReserveResponse {
-    return obj && typeof obj.last_price === 'string';
+    return obj && typeof obj.BTC.EUR.buy === 'string';
 }
 
 export class BitcoinReservePriceSource implements PriceSource {
@@ -22,8 +22,6 @@ export class BitcoinReservePriceSource implements PriceSource {
         const response = await axios.get<BitcoinReserveResponse>(
             `${BitcoinReservePriceSource.URL}`
         );
-        console.log(response.data)
-        console.log(response.data.BTC.EUR.buy)
 
         if (!isBitcoinReserveResponse(response.data)) {
             throw new Error(
