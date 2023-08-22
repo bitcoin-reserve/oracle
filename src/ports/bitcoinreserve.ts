@@ -7,11 +7,11 @@ import { Ticker } from '../domain/ticker';
 axiosThrottle.use(axios, { requestsPerSecond: 5 });
 
 type BitcoinReserveResponse = {
-    BTC: {EUR: {buy:string;}};
+    BTC: {USD: {buy:string;}};
 };
 
 function isBitcoinReserveResponse(obj: any): obj is BitcoinReserveResponse {
-    return obj && typeof obj.BTC.EUR.buy === 'string';
+    return obj && typeof obj.BTC.USD.buy === 'string';
 }
 
 export class BitcoinReservePriceSource implements PriceSource {
@@ -28,6 +28,6 @@ export class BitcoinReservePriceSource implements PriceSource {
                 `Invalid response from ${BitcoinReservePriceSource.URL}`
             );
         }
-        return Number(response.data.BTC.EUR.buy);
+        return Number(response.data.BTC.USD.buy);
     }
 }
